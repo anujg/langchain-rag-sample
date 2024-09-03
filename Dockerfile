@@ -10,17 +10,18 @@ RUN apt-get update -y \
 
 WORKDIR /app
 
-# RUN git clone https://github.com/streamlit/streamlit-example.git .
+# Install poetry
+RUN pip install poetry
 
-# RUN pip3 install -r requirements.txt
+# Copy the pyproject.toml (and possibly poetry.lock) file to the container
+COPY pyproject.toml /app/
 
-COPY Pipfile .
+# Install dependencies via poetry
+RUN poetry config virtualenvs.create false \
+  && poetry install
 
-RUN  pip install pipenv && pipenv install --deploy --ignore-pipfile
-
-COPY . .
-
-RUN pipenv shell
+# Copy the rest of your application's code
+COPY . /app/
 
 ARG OPENAI_API_KEY
 ARG PINECONE_API_KEY
@@ -29,4 +30,4 @@ EXPOSE 8501
 
 # HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS false"]
+CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS false"]

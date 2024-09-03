@@ -1,9 +1,12 @@
-[[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
+[tool.poetry]
+name = "langchain-rag-sample"
+version = "0.1.0"
+description = "A project to demonstrate sample doc upload functionality with LLM"
+authors = ["Anuj Gupta <anuj78@gmail.com>"]
+readme = "README.md"
 
-[packages]
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
 langchain = "*"
 beautifulsoup4 = "*"
 black = "*"
@@ -26,7 +29,7 @@ langchainhub = "*"
 python-dotenv = "*"
 docx2txt = "*"
 
-[dev-packages]
 
-[requires]
-python_version = "3.10"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
