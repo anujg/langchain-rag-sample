@@ -20,6 +20,8 @@ RUN  pip install pipenv && pipenv install --deploy --ignore-pipfile
 
 COPY . .
 
+RUN pipenv shell
+
 ARG OPENAI_API_KEY
 ARG PINECONE_API_KEY
 
