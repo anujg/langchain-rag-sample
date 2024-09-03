@@ -14,11 +14,11 @@ WORKDIR /app
 
 # RUN pip3 install -r requirements.txt
 
-COPY Pipfile /app/
+COPY Pipfile .
 
 RUN  pip install pipenv && pipenv install --deploy --ignore-pipfile
 
-COPY . /app/
+COPY . .
 
 ARG OPENAI_API_KEY
 ARG PINECONE_API_KEY
@@ -27,4 +27,4 @@ EXPOSE 8501
 
 # HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS false"]
