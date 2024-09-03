@@ -26,8 +26,8 @@ COPY . /app/
 ARG OPENAI_API_KEY
 ARG PINECONE_API_KEY
 
-EXPOSE 8501
+EXPOSE 8080
 
 # HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS false"]
+CMD streamlit run main.py --server.port=8080 --browser.serverAddress="0.0.0.0"
