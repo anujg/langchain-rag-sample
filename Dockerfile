@@ -16,7 +16,7 @@ WORKDIR /app
 
 COPY Pipfile /app/
 
-RUN  pip install pipenv && pipenv install --deploy --system --ignore-pipfile
+RUN  pip install pipenv && pipenv install --deploy --ignore-pipfile
 
 COPY . /app/
 
